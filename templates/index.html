@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Acne Region Predictor</title>
+</head>
+<body>
+    <h1>Upload your face image</h1>
+    <input type="file" id="imageUpload" accept="image/*">
+    <button onclick="predictImage()">Predict</button>
+    <div id="result"></div>
+
+    <script>
+        function predictImage() {
+            const imageUpload = document.getElementById('imageUpload');
+            const file = imageUpload.files[0];
+            
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const imgData = event.target.result;
+                    
+                    fetch('/predict', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({image: imgData})
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('result').innerText = JSON.stringify(data);
+                    });
+                }
+                reader.readAsDataURL(file);
+            } else {
+                document.getElementById('result').innerText = 'No file selected.';
+            }
+        }
+    </script>
+</body>
+</html>
