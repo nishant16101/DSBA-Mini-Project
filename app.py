@@ -37,7 +37,7 @@ class AcneRegionClassifier(nn.Module):
 
 # Load the model
 model = AcneRegionClassifier()
-model.load_state_dict(torch.load('best_acne_model.pt', map_location=torch.device('cpu')))
+model.load_state_dict(torch.load('best_acne_model .pt', map_location=torch.device('cpu')))
 model.eval()
 
 @app.route('/', methods=['GET'])
