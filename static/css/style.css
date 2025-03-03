@@ -28,3 +28,20 @@ form {
     max-width: 100%;
     margin-top: 1rem;
 }
+
+.face-mapping {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-left: 4px solid #4CAF50;
+    border-radius: 4px;
+}
+
+.highest-region {
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.error {
+    color: #f44336;
+}   
