@@ -88,7 +88,7 @@ function displayResults(data, file) {
     // Display Chinese face mapping for highest region
     resultDiv.innerHTML += `
         <div class="face-mapping">
-            <h3>Chinese Face Mapping Analysis:</h3>
+            <h3>Face Mapping Analysis:</h3>
             <p><strong>Based on your ${highestRegion} acne, this may indicate:</strong></p>
             <p><strong>Related Body Systems:</strong> ${faceMapping[highestRegion].organs}</p>
             <p><strong>Potential Issues:</strong> ${faceMapping[highestRegion].issues}</p>
