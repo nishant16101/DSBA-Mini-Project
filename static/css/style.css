@@ -1,47 +1,89 @@
 body {
     font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f0f0f0;
+    background-color: #f2f2f2;
+}
+
+.landing-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.get-started-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .container {
-    background-color: white;
-    padding: 2rem;
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-form {
-    margin-bottom: 1rem;
+#upload-form {
+    margin-bottom: 20px;
 }
 
-#result {
-    margin-top: 1rem;
+.upload-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#result-container {
+    margin-top: 20px;
 }
 
 #uploaded-image {
-    max-width: 100%;
-    margin-top: 1rem;
-}
-
-.face-mapping {
-    margin-top: 20px;
-    padding: 15px;
-    background-color: #f9f9f9;
-    border-left: 4px solid #4CAF50;
-    border-radius: 4px;
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
 }
 
 .highest-region {
-    font-weight: bold;
-    color: #4CAF50;
+    color: #007bff;
 }
 
-.error {
-    color: #f44336;
-}   
+.diet-container {
+    margin-top: 20px;
+}
+
+.diet-card {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.diet-card img {
+    width: 100px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.diet-suggestions ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.diet-suggestions li {
+    margin-bottom: 10px;
+}
+
+.diet-suggestions strong {
+    font-weight: bold;
+}

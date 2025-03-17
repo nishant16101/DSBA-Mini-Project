@@ -50,27 +50,43 @@ function displayResults(data, file) {
     let highestRegion = Object.keys(data).reduce((a, b) => data[a] > data[b] ? a : b);
     console.log('Highest region:', highestRegion);
     
-    // Chinese face mapping database
-    const faceMapping = {
+    // Diet suggestions based on acne region
+    const dietSuggestions = {
         'forehead': {
-            'organs': 'Bladder and Small Intestine',
-            'issues': 'Poor digestion, stress, irregular sleep, toxin buildup',
-            'suggestions': 'Improve hydration, reduce processed foods, manage stress, ensure adequate sleep'
+            'title': 'Small Intestine (Pitta Imbalance)',
+            'description': 'An overheated or inflamed intestine can cause acne.',
+            'foods': [
+                { type: 'Cooling Foods', items: 'Cucumber, coriander, fennel, coconut water' },
+                { type: 'Herbs', items: 'Triphala, licorice, aloe vera juice' },
+                { type: 'Easily Digestible Foods', items: 'Moong dal, rice, ghee, warm soups' }
+            ]
         },
         'cheeks': {
-            'organs': 'Stomach, Spleen, and Respiratory System',
-            'issues': 'Poor diet, allergies, smoking, pollution exposure',
-            'suggestions': 'Clean your phone regularly, avoid touching your face, improve diet with antioxidants'
+            'title': 'Stomach & Respiratory System (Vata + Pitta Imbalance)',
+            'description': 'Poor digestion and allergies can lead to acne.',
+            'foods': [
+                { type: 'Digestive Boosters', items: 'Buttermilk, ginger tea, cumin, ajwain' },
+                { type: 'Fiber-Rich Foods', items: 'Psyllium husk (Isabgol), flaxseeds, triphala churna' },
+                { type: 'Soothing Foods', items: 'Ghee, rice, moong dal, pumpkin' }
+            ]
         },
         'nose': {
-            'organs': 'Heart and Blood Pressure',
-            'issues': 'Blood pressure issues, poor circulation, vitamin B deficiency',
-            'suggestions': 'Check blood pressure, consume vitamin B-rich foods, reduce sodium intake'
+            'title': 'Heart (Pitta Imbalance)',
+            'description': 'Poor circulation can lead to toxin buildup, causing acne.',
+            'foods': [
+                { type: 'Heart-Friendly Foods', items: 'Pomegranate, beetroot, almonds, walnuts' },
+                { type: 'Cooling Herbs', items: 'Arjuna, Brahmi, Tulsi tea' },
+                { type: 'Healthy Fats', items: 'Cow ghee, sesame seeds, flaxseeds' }
+            ]
         },
         'chin': {
-            'organs': 'Hormonal Balance and Reproductive System',
-            'issues': 'Hormonal imbalance, stress, poor diet',
-            'suggestions': 'Balance hormones with regular exercise, manage stress, consider gynecological check-up'
+            'title': 'Reproductive System (Vata + Pitta Imbalance)',
+            'description': 'Hormonal imbalances can cause cystic acne.',
+            'foods': [
+                { type: 'Hormone Balancing Foods', items: 'Leafy greens, omega-3 rich foods' },
+                { type: 'Stress Reducing Herbs', items: 'Ashwagandha, Brahmi' },
+                { type: 'Hydrating Foods', items: 'Watermelon, cucumber, coconut water' }
+            ]
         }
     };
     
@@ -85,14 +101,15 @@ function displayResults(data, file) {
         resultDiv.innerHTML += `<p class="${isHighest ? 'highest-region' : ''}">${region}: ${percentage}%${isHighest ? ' (Highest)' : ''}</p>`;
     }
     
-    // Display Chinese face mapping for highest region
+    // Display diet suggestions for highest region
     resultDiv.innerHTML += `
-        <div class="face-mapping">
-            <h3>Face Mapping Analysis:</h3>
-            <p><strong>Based on your ${highestRegion} acne, this may indicate:</strong></p>
-            <p><strong>Related Body Systems:</strong> ${faceMapping[highestRegion].organs}</p>
-            <p><strong>Potential Issues:</strong> ${faceMapping[highestRegion].issues}</p>
-            <p><strong>Suggestions:</strong> ${faceMapping[highestRegion].suggestions}</p>
+        <div class="diet-suggestions">
+            <h3>Diet Suggestions for ${highestRegion} Acne:</h3>
+            <h4>${dietSuggestions[highestRegion].title}</h4>
+            <p>${dietSuggestions[highestRegion].description}</p>
+            <ul>
+                ${dietSuggestions[highestRegion].foods.map(food => `<li><strong>${food.type}:</strong> ${food.items}</li>`).join('')}
+            </ul>
         </div>
     `;
 }

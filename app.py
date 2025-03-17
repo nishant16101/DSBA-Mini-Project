@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, url_for
 import torch
 import torch.nn as nn
 from PIL import Image
@@ -40,7 +40,11 @@ model = AcneRegionClassifier()
 model.load_state_dict(torch.load('best_acne_model .pt', map_location=torch.device('cpu')))
 model.eval()
 
-@app.route('/', methods=['GET'])
+@app.route('/')
+def landing():
+    return render_template('landing.html')
+
+@app.route('/index', methods=['GET'])
 def index():
     return render_template('index.html')
 
@@ -49,7 +53,7 @@ def predict():
     data = request.get_json()
     image_data = data['image']
     
-    #Decode image data
+    # Decode image data
     image = Image.open(BytesIO(base64.b64decode(image_data.split(',')[1])))
     
     # Preprocess the image
@@ -70,4 +74,4 @@ def predict():
     return jsonify(result)
 
 if __name__ == '__main__':
-    app.run(debug=True) 
+    app.run(debug=True)

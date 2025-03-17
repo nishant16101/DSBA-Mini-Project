@@ -3,22 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acne Region Classifier</title>
+    <title>Acne Detection</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>Acne Region Classifier</h1>
-        <p>Upload an image to detect the facial region with acne</p>
+        <h1>Acne Detection</h1>
+        <p>Upload an image to detect the facial region with acne and get personalized diet suggestions.</p>
         
         <form id="upload-form">
             <input type="file" id="image-upload" accept="image/*">
-            <button type="submit">Analyze</button>
+            <button type="submit" class="upload-btn">Upload Image</button>
         </form>
         
         <div id="result-container">
             <img id="uploaded-image" style="display: none;">
             <div id="result"></div>
+        </div>
+        
+        <div class="diet-container">
+            <h2>Example Diet Suggestions</h2>
+            <div class="diet-card">
+                <img src="{{ url_for('static', filename='images/cucumber.jpg') }}" alt="Cucumber">
+                <h3>Cooling Foods</h3>
+                <p>Cucumber, coriander, fennel, coconut water.</p>
+            </div>
+            <div class="diet-card">
+                <img src="{{ url_for('static', filename='images/beetroot.jpg') }}" alt="Beetroot">
+                <h3>Heart-Friendly Foods</h3>
+                <p>Pomegranate, beetroot, almonds, walnuts.</p>
+            </div>
         </div>
     </div>
     
