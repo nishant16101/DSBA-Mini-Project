@@ -1,89 +1,21 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
-}
-
-.landing-container {
-    max-width: 800px;
+.suggestion-container {
+    max-width: 600px;
     margin: auto;
     padding: 20px;
-    text-align: center;
-    background-color: #fff;
+    background: white;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-.get-started-btn {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.container {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-#upload-form {
-    margin-bottom: 20px;
-}
-
-.upload-btn {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#result-container {
-    margin-top: 20px;
-}
-
-#uploaded-image {
-    width: 100%;
-    height: auto;
-    margin-bottom: 20px;
-}
-
-.highest-region {
-    color: #007bff;
-}
-
-.diet-container {
-    margin-top: 20px;
 }
 
 .diet-card {
     background-color: #f9f9f9;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 5px;
     margin-bottom: 10px;
 }
 
 .diet-card img {
-    width: 100px;
-    height: auto;
-    margin-bottom: 10px;
-}
-
-.diet-suggestions ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.diet-suggestions li {
-    margin-bottom: 10px;
-}
-
-.diet-suggestions strong {
-    font-weight: bold;
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
 }

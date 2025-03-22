@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diet Suggestions</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="suggestion-container">
+        <h1>Personalized Diet Suggestions</h1>
+        <div id="diet-suggestions"></div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const detectedRegions = JSON.parse(localStorage.getItem('detectedRegions'));
+            const dietSuggestions = document.getElementById('diet-suggestions');
+            dietSuggestions.innerHTML = '';
+            
+            // Example logic to map regions to diet suggestions
+            const regions = ['forehead', 'cheeks', 'nose', 'chin'];
+            regions.forEach(region => {
+                let suggestion;
+                
+                if (region === 'forehead') {
+                    suggestion = `
+                        <div class="diet-card">
+                            <h3>Forehead Diet Suggestions</h3>
+                            <p>Cooling Foods: Cucumber, coriander, fennel, coconut water.</p>
+                            <p>Herbs: Triphala, licorice, aloe vera juice.</p>
+                            <p>Easily Digestible Foods: Moong dal, rice, ghee, warm soups.</p>
+                        </div>
+                    `;
+                } else if (region === 'cheeks') {
+                    suggestion = `
+                        <div class="diet-card">
+                            <h3>Cheeks Diet Suggestions</h3>
+                            <p>Diuretic Foods: Barley water, cranberry juice, coconut water.</p>
+                            <p>Herbs: Punarnava, gokshura, coriander seeds tea.</p>
+                            <p>Hydrating Foods: Watermelon, cucumber, ash gourd.</p>
+                        </div>
+                    `;
+                } else if (region === 'nose') {
+                    suggestion = `
+                        <div class="diet-card">
+                            <h3>Nose Diet Suggestions</h3>
+                            <p>Heart-Friendly Foods: Pomegranate, beetroot, almonds, walnuts.</p>
+                            <p>Cooling Herbs: Arjuna, Brahmi, Tulsi tea.</p>
+                            <p>Healthy Fats: Cow ghee, sesame seeds, flaxseeds.</p>
+                        </div>
+                    `;
+                } else if (region === 'chin') {
+                    suggestion = `
+                        <div class="diet-card">
+                            <h3>Chin Diet Suggestions</h3>
+                            <p>Liver Cleansing Foods: Turmeric, bitter gourd, neem, amla.</p>
+                            <p>Herbs: Kutki, Bhumiamalaki, Aloe Vera.</p>
+                            <p>Foods to Support Detox: Green leafy vegetables, beetroot, radish.</p>
+                        </div>
+                    `;
+                }
+                
+                if (detectedRegions[region] > 0.5) {
+                    dietSuggestions.insertAdjacentHTML('beforeend', suggestion);
+                }
+            });
+            
+            // Add logic for other regions if needed
+        });
+    </script>
+</body>
+</html>

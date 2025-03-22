@@ -21,19 +21,7 @@
             <div id="result"></div>
         </div>
         
-        <div class="diet-container">
-            <h2>Example Diet Suggestions</h2>
-            <div class="diet-card">
-                <img src="{{ url_for('static', filename='images/cucumber.jpg') }}" alt="Cucumber">
-                <h3>Cooling Foods</h3>
-                <p>Cucumber, coriander, fennel, coconut water.</p>
-            </div>
-            <div class="diet-card">
-                <img src="{{ url_for('static', filename='images/beetroot.jpg') }}" alt="Beetroot">
-                <h3>Heart-Friendly Foods</h3>
-                <p>Pomegranate, beetroot, almonds, walnuts.</p>
-            </div>
-        </div>
+        <button id="proceed-btn" style="display: none;" onclick="showDiet()">Proceed to Diet Suggestions</button>
     </div>
     
     <script src="{{ url_for('static', filename='script.js') }}"></script>

@@ -71,7 +71,19 @@ def predict():
     
     regions = ['forehead', 'cheeks', 'nose', 'chin']
     result = dict(zip(regions, probabilities))
+    
+    # Store the detected regions in session for later use
+    session = app.config.get('SESSION')
+    if session is None:
+        app.config['SESSION'] = {}
+    app.config['SESSION']['detected_regions'] = result
+    
     return jsonify(result)
+
+@app.route('/suggestions', methods=['GET'])
+def suggestions():
+    detected_regions = app.config.get('SESSION', {}).get('detected_regions', {})
+    return render_template('suggestion.html', detected_regions=detected_regions)
 
 if __name__ == '__main__':
     app.run(debug=True)
