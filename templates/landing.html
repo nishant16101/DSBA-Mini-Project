@@ -4,21 +4,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acne Detection</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
 </head>
-<body>
-    <div class="landing-container">
-        <h1>Acne Detection</h1>
-        <p>Discover the root cause of your acne and get personalized diet suggestions.</p>
-        <a href="{{ url_for('index') }}" class="get-started-btn">Get Started</a>
-        <div class="intro">
-            <h2>How It Works</h2>
-            <ul>
-                <li>Upload a photo of your face.</li>
-                <li>Our AI detects acne-prone areas.</li>
-                <li>Receive tailored diet advice.</li>
-            </ul>
+<body class="bg-gradient-to-br from-blue-50 to-white min-h-screen">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <!-- Logo -->
+                    <div class="flex-shrink-0 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                        </svg>
+                        <span class="ml-2 text-xl font-bold text-gray-800">AcneAI</span>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <a href="{{ url_for('index') }}" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                    <a href="#" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">About</a>
+                    <a href="#" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-16 text-center">
+        <div class="max-w-2xl mx-auto">
+            <h1 class="text-5xl font-bold text-gray-900 mb-6 leading-tight">Acne Detection</h1>
+            <p class="text-xl text-gray-600 mb-10">Discover the root cause of your acne and get personalized diet suggestions.</p>
+            
+            <a href="{{ url_for('index') }}" class="bg-blue-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-blue-700 transition duration-300 inline-block shadow-lg hover:shadow-xl">
+                Get Started
+            </a>
+
+            <div class="mt-16 bg-white rounded-xl shadow-lg p-10">
+                <h2 class="text-3xl font-bold text-gray-800 mb-8">How It Works</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <div class="text-5xl font-bold text-blue-600 mb-4">1</div>
+                        <p class="text-gray-700">Upload a photo of your face</p>
+                    </div>
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <div class="text-5xl font-bold text-blue-600 mb-4">2</div>
+                        <p class="text-gray-700">Our AI detects acne-prone areas</p>
+                    </div>
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <div class="text-5xl font-bold text-blue-600 mb-4">3</div>
+                        <p class="text-gray-700">Receive tailored diet advice</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <div class="mb-4">
+                <p>&copy; 2024 AcneAI. All rights reserved.</p>
+            </div>
+            <div class="flex justify-center space-x-4">
+                <a href="#" class="hover:text-blue-400">Privacy Policy</a>
+                <a href="#" class="hover:text-blue-400">Terms of Service</a>
+                <a href="#" class="hover:text-blue-400">Contact Us</a>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

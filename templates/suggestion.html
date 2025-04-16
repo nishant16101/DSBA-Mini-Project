@@ -1,73 +1,124 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diet Suggestions</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
-    <div class="suggestion-container">
-        <h1>Personalized Diet Suggestions</h1>
-        <div id="diet-suggestions"></div>
-    </div>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const detectedRegions = JSON.parse(localStorage.getItem('detectedRegions'));
-            const dietSuggestions = document.getElementById('diet-suggestions');
-            dietSuggestions.innerHTML = '';
-            
-            // Example logic to map regions to diet suggestions
-            const regions = ['forehead', 'cheeks', 'nose', 'chin'];
-            regions.forEach(region => {
-                let suggestion;
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Diet Suggestions</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+        <style>
+            body {
+                font-family: 'Inter', sans-serif;
+            }
+        </style>
+    </head>
+    <body class="bg-gradient-to-br from-blue-50 to-white min-h-screen">
+        <!-- Navbar -->
+        <nav class="bg-white shadow-md">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-16">
+                    <div class="flex">
+                        <!-- Logo -->
+                        <div class="flex-shrink-0 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                            </svg>
+                            <span class="ml-2 text-xl font-bold text-gray-800">AcneAI</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <a href="{{ url_for('index') }}" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="#" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">About</a>
+                        <a href="#" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="container mx-auto px-4 py-16">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-4xl font-bold text-gray-900 mb-8 text-center">Personalized Diet Suggestions</h1>
                 
-                if (region === 'forehead') {
-                    suggestion = `
-                        <div class="diet-card">
-                            <h3>Forehead Diet Suggestions</h3>
-                            <p>Cooling Foods: Cucumber, coriander, fennel, coconut water.</p>
-                            <p>Herbs: Triphala, licorice, aloe vera juice.</p>
-                            <p>Easily Digestible Foods: Moong dal, rice, ghee, warm soups.</p>
-                        </div>
-                    `;
-                } else if (region === 'cheeks') {
-                    suggestion = `
-                        <div class="diet-card">
-                            <h3>Cheeks Diet Suggestions</h3>
-                            <p>Diuretic Foods: Barley water, cranberry juice, coconut water.</p>
-                            <p>Herbs: Punarnava, gokshura, coriander seeds tea.</p>
-                            <p>Hydrating Foods: Watermelon, cucumber, ash gourd.</p>
-                        </div>
-                    `;
-                } else if (region === 'nose') {
-                    suggestion = `
-                        <div class="diet-card">
-                            <h3>Nose Diet Suggestions</h3>
-                            <p>Heart-Friendly Foods: Pomegranate, beetroot, almonds, walnuts.</p>
-                            <p>Cooling Herbs: Arjuna, Brahmi, Tulsi tea.</p>
-                            <p>Healthy Fats: Cow ghee, sesame seeds, flaxseeds.</p>
-                        </div>
-                    `;
-                } else if (region === 'chin') {
-                    suggestion = `
-                        <div class="diet-card">
-                            <h3>Chin Diet Suggestions</h3>
-                            <p>Liver Cleansing Foods: Turmeric, bitter gourd, neem, amla.</p>
-                            <p>Herbs: Kutki, Bhumiamalaki, Aloe Vera.</p>
-                            <p>Foods to Support Detox: Green leafy vegetables, beetroot, radish.</p>
-                        </div>
-                    `;
-                }
+                <div 
+                    id="diet-suggestions" 
+                    class="grid md:grid-cols-2 gap-6"
+                ></div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white py-8">
+            <div class="container mx-auto px-4 text-center">
+                <div class="mb-4">
+                    <p>&copy; 2024 AcneAI. All rights reserved.</p>
+                </div>
+                <div class="flex justify-center space-x-4">
+                    <a href="#" class="hover:text-blue-400">Privacy Policy</a>
+                    <a href="#" class="hover:text-blue-400">Terms of Service</a>
+                    <a href="#" class="hover:text-blue-400">Contact Us</a>
+                </div>
+            </div>
+        </footer>
+        
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const detectedRegions = {{ detected_regions|tojson }};
+
+
+                const dietSuggestions = document.getElementById('diet-suggestions');
+                dietSuggestions.innerHTML = '';
                 
-                if (detectedRegions[region] > 0.5) {
-                    dietSuggestions.insertAdjacentHTML('beforeend', suggestion);
-                }
+                // Example logic to map regions to diet suggestions
+                const regions = ['forehead', 'cheeks', 'nose', 'chin'];
+                regions.forEach(region => {
+                    let suggestion;
+                    
+                    if (region === 'forehead') {
+                        suggestion = `
+                            <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition duration-300">
+                                <h3 class="text-2xl font-semibold text-blue-600 mb-4">Forehead Diet Suggestions</h3>
+                                <p class="text-gray-700 mb-2"><span class="font-semibold">Cooling Foods:</span> Cucumber, coriander, fennel, coconut water.</p>
+                                <p class="text-gray-700 mb-2"><span class="font-semibold">Herbs:</span> Triphala, licorice, aloe vera juice.</p>
+                                <p class="text-gray-700"><span class="font-semibold">Easily Digestible Foods:</span> Moong dal, rice, ghee, warm soups.</p>
+                            </div>
+                        `;
+                    } else if (region === 'cheeks') {
+                        suggestion = `
+                            <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition duration-300">
+                                <h3 class="text-2xl font-semibold text-blue-600 mb-4">Cheeks Diet Suggestions</h3>
+                                <p class="text-gray-700 mb-2"><span class="font-semibold">Diuretic Foods:</span> Barley water, cranberry juice, coconut water.</p>
+                                <p class="text-gray-700 mb-2"><span class="font-semibold">Herbs:</span> Punarnava, gokshura, coriander seeds tea.</p>
+                                <p class="text-gray-700"><span class="font-semibold">Hydrating Foods:</span> Watermelon, cucumber, ash gourd.</p>
+                            </div>
+                        `;
+                    } else if (region === 'nose') {
+                        suggestion = `
+                            <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition duration-300">
+                                <h3 class="text-2xl font-semibold text-blue-600 mb-4">Nose Diet Suggestions</h3>
+                                <p class="text-gray-700 mb-2"><span class="font-semibold">Heart-Friendly Foods:</span> Pomegranate, beetroot, almonds, walnuts.</p>
+                                <p class="text-gray-700 mb-2"><span class="font-semibold">Cooling Herbs:</span> Arjuna, Brahmi, Tulsi tea.</p>
+                                <p class="text-gray-700"><span class="font-semibold">Healthy Fats:</span> Cow ghee, sesame seeds, flaxseeds.</p>
+                            </div>
+                        `;
+                    } else if (region === 'chin') {
+                        suggestion = `
+                            <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition duration-300">
+                                <h3 class="text-2xl font-semibold text-blue-600 mb-4">Chin Diet Suggestions</h3>
+                                <p class="text-gray-700 mb-2"><span class="font-semibold">Liver Cleansing Foods:</span> Turmeric, bitter gourd, neem, amla.</p>
+                                <p class="text-gray-700 mb-2"><span class="font-semibold">Herbs:</span> Kutki, Bhumiamalaki, Aloe Vera.</p>
+                                <p class="text-gray-700"><span class="font-semibold">Foods to Support Detox:</span> Green leafy vegetables, beetroot, radish.</p>
+                            </div>
+                        `;
+                    }
+                    
+                    if (detectedRegions[region] > 0.5) {
+                        dietSuggestions.insertAdjacentHTML('beforeend', suggestion);
+                    }
+                });
+                
+                // Add logic for other regions if needed
             });
-            
-            // Add logic for other regions if needed
-        });
-    </script>
-</body>
-</html>
+        </script>
+    </body>
+    </html> 

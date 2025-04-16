@@ -3,27 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acne Detection</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Acne Detection - Upload</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div class="container">
-        <h1>Acne Detection</h1>
-        <p>Upload an image to detect the facial region with acne and get personalized diet suggestions.</p>
-        
-        <form id="upload-form">
-            <input type="file" id="image-upload" accept="image/*">
-            <button type="submit" class="upload-btn">Upload Image</button>
-        </form>
-        
-        <div id="result-container">
-            <img id="uploaded-image" style="display: none;">
-            <div id="result"></div>
+<body class="bg-gradient-to-br from-blue-50 to-white min-h-screen">
+    <nav class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between h-16 items-center">
+            <div class="flex items-center">
+                <span class="ml-2 text-xl font-bold text-gray-800">AcneAI</span>
+            </div>
+            <div>
+                <a href="{{ url_for('personalized') }}" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">My Summary</a>
+                <a href="{{ url_for('logout') }}" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Logout</a>
+            </div>
         </div>
-        
-        <button id="proceed-btn" style="display: none;" onclick="showDiet()">Proceed to Diet Suggestions</button>
+    </nav>
+    <div class="container mx-auto px-4 py-16 text-center">
+        <h1 class="text-4xl font-bold text-gray-900 mb-8">Upload Your Face Photo</h1>
+        <input type="file" id="imageInput" accept="image/*" class="mb-6">
+        <div>
+            <button id="uploadBtn" class="bg-blue-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-blue-700 transition duration-300">Detect Acne</button>
+        </div>
+        <div id="result" class="mt-8"></div>
     </div>
-    
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        document.getElementById('uploadBtn').onclick = function() {
+            const input = document.getElementById('imageInput');
+            const file = input.files[0];
+            if (!file) {
+                alert('Please select an image.');
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                fetch('/predict', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ image: e.target.result })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    // Show probabilities on the page
+                    let resultDiv = document.getElementById('result');
+                    resultDiv.innerHTML = `
+                        <div class="bg-white rounded-xl shadow-lg p-6 mt-6 max-w-md mx-auto">
+                            <h2 class="text-2xl font-bold mb-4 text-blue-700">Detected Probabilities</h2>
+                            <ul class="text-left mb-4">
+                                <li><strong>Forehead:</strong> ${(data.forehead * 100).toFixed(2)}%</li>
+                                <li><strong>Cheeks:</strong> ${(data.cheeks * 100).toFixed(2)}%</li>
+                                <li><strong>Nose:</strong> ${(data.nose * 100).toFixed(2)}%</li>
+                                <li><strong>Chin:</strong> ${(data.chin * 100).toFixed(2)}%</li>
+                            </ul>
+                            <button id="viewSuggestionsBtn" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">View Diet Suggestions</button>
+                        </div>
+                    `;
+                    // Save to localStorage for suggestions page if you use it there
+                    localStorage.setItem('detectedRegions', JSON.stringify(data));
+                    // Add event listener for the new button
+                    document.getElementById('viewSuggestionsBtn').onclick = function() {
+                        window.location.href = "/suggestions";
+                    };
+                });
+            };
+            reader.readAsDataURL(file);
+        };
+        </script>
+        
 </body>
 </html>
